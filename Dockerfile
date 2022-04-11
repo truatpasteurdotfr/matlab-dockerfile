@@ -17,6 +17,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && \
         wget \
         unzip \
         ca-certificates && \
+    apt-get upgrade -y && \
     apt-get clean && apt-get autoremove
 
 # Run mpm to install MATLAB in the target location and delete the mpm installation afterwards
@@ -25,7 +26,25 @@ RUN wget -q https://www.mathworks.com/mpm/glnxa64/mpm && \
     ./mpm install \
         --release=${MATLAB_RELEASE} \
         --destination=/opt/matlab \
-        --products MATLAB && \
+        --products MATLAB \
+		Bioinformatics_Toolbox \
+		Computer_Vision_Toolbox \
+		Curve_Fitting_Toolbox \
+		Database_Toolbox \
+		Deep_Learning_Toolbox \
+		Fixed-Point_Designer \
+		Global_Optimization_Toolbox \
+		Image_Acquisition_Toolbox \
+		Image_Processing_Toolbox \
+		MATLAB_Compiler \
+		MATLAB_Compiler_SDK \
+		Mapping_Toolbox \
+		Optimization_Toolbox \
+		Parallel_Computing_Toolbox \
+		Signal_Processing_Toolbox \
+		Statistics_and_Machine_Learning_Toolbox \
+		Symbolic_Math_Toolbox \ 
+&& \
     rm -f mpm /tmp/mathworks_root.log && \
     ln -s /opt/matlab/bin/matlab /usr/local/bin/matlab
 
